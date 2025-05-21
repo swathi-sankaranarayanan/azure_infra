@@ -1,0 +1,8 @@
+module "create_resources" {
+  source = "./modules/network"
+
+  resource_group = "rg-swathi"
+  address_virtual_network = ["10.0.0.0/16"]
+  address_subnet = ["10.0.1.0/24"]
+  port_range = ["80", "443"]
+}
