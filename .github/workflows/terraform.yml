@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  plan:
     name: 'Terraform Plan'
     runs-on: self-hosted
     environment: production
@@ -52,16 +52,20 @@ jobs:
     name: "Terraform Apply"
     runs-on: self-hosted
     environment: "Production"
+    needs: "plan"
 
     defaults:
       run:
         shell: bash
-
+      
     steps:
     - name: Download a single artifact
       uses: actions/download-artifact@v4
       with: 
         name: plan.out
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
