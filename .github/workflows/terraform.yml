@@ -34,6 +34,13 @@ jobs:
     - name: Starting Terraform
       run: echo '### Terraform Plan! 🚀' >> $GITHUB_STEP_SUMMARY
 
+    - name: Tests
+      env:
+        AA_STEP_VAR : "This is a plan step env var"
+      run: |
+        echo "Env variable: ${{ vars.TF_VAR_NAME }}"
+        export 
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
@@ -82,7 +89,7 @@ jobs:
 
     - name: Tests
       env:
-        AA_STEP_VAR : "This is a step env var"
+        AA_STEP_VAR : "This is a apply step env var"
       run: |
         echo "Env variable: ${{ vars.TF_VAR_NAME }}"
         export 
