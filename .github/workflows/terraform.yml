@@ -15,7 +15,7 @@ jobs:
   plan:
     name: 'Terraform Plan'
     runs-on: self-hosted
-    #environment: production
+    environment: development
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
