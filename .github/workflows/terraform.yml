@@ -59,7 +59,7 @@ jobs:
   apply:
     name: "Terraform Apply"
     runs-on: self-hosted
-    #environment: "Production"
+    environment: "Production"
     needs: "plan"
 
     defaults:
@@ -81,19 +81,19 @@ jobs:
        #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -input=false plan.out
 
-  destroy:
-      name: "Terraform Destroy"
-      runs-on: self-hosted
+#  destroy:
+#      name: "Terraform Destroy"
+#      runs-on: self-hosted
       #environment: "Production"
-      needs: "apply"
+ #     needs: "apply"
     
-      steps:
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+ #     steps:
+  #    - name: Setup Terraform
+  #      uses: hashicorp/setup-terraform@v3
         # On push to "main", build or change infrastructure according to Terraform configuration files
         # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-      - name: Terraform Destroy
+  #    - name: Terraform Destroy
          #needs: "Terraform Plan"
          #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-        run: terraform destroy
+  #      run: terraform destroy
   
