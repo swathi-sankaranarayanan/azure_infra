@@ -59,7 +59,7 @@ jobs:
   apply:
     name: "Terraform Apply"
     runs-on: self-hosted
-    environment: "Production"
+    #environment: "Production"
     needs: "plan"
 
     defaults:
@@ -80,3 +80,10 @@ jobs:
        #needs: "Terraform Plan"
        #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -input=false plan.out
+
+  destroy:
+      name: "Terraform Destroy"
+      runs-on: self-hosted
+      #environment: "Production"
+      needs: "apply"
+  
