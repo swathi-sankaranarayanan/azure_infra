@@ -28,6 +28,9 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
 
+    - name: Starting Terraform
+      run: echo '### Terraform Plan! 🚀' >> $GITHUB_STEP_SUMMARY
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
@@ -40,6 +43,9 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false -out=plan.out
+
+    - name: Plan Summary
+      run: terraform show plan.out >> $GITHUB_STEP_SUMMARY
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
