@@ -42,6 +42,8 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
+      env:
+        TF_VAR_name: swathiss
       run: terraform plan -input=false -out=plan.out
 
     - name: Plan Summary
