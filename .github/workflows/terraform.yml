@@ -43,7 +43,7 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       env:
-        TF_VAR_name: swathi
+        TF_VAR_name: ${{ vars.TF_VAR_NAME }}
       run: terraform plan -input=false -out=plan.out
 
     - name: Plan Summary
@@ -79,7 +79,9 @@ jobs:
     - name: Terraform Apply
        #needs: "Terraform Plan"
        #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -input=false plan.out
+      run: |
+        echo "Env variable: $MY_VAR"
+        terraform apply -input=false plan.out
 
 #  destroy:
 #      name: "Terraform Destroy"
